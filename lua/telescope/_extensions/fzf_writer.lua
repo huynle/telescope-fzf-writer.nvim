@@ -71,6 +71,7 @@ return require('telescope').register_extension {
       opts = opts or {}
 
       local fzf_separator = opts.fzf_separator or "|"
+      local search_dir = opts.search_dir or "."
 
       local live_grepper = finders._new {
         fn_command = function(_, prompt)
@@ -87,7 +88,7 @@ return require('telescope').register_extension {
             fzf_prompt = ""
           end
 
-          local rg_args = flatten { conf.vimgrep_arguments, rg_prompt, "." }
+          local rg_args = flatten { conf.vimgrep_arguments, rg_prompt, search_dir }
           table.remove(rg_args, 1)
 
           return {
